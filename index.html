@@ -1,31 +1,680 @@
 <!DOCTYPE html>
-<html lang="zh">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YZFLIGHT远征飞行 - 官方网站</title>
+<html lang="en" translate="no">
+  <head>
+    <!--Alist V3建议添加的，已经默认添加了，如果你的没有建议加上-->
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=String.prototype.replaceAll"></script>
+
+<!--引入字体，全局字体使用-->
+<link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css" />
+
+<!--评论系统使用的js-->
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<!--不蒜子计数器-->
+<script async src="https://busuanzi.icodeq.com/busuanzi.pure.mini.js"></script>
+
+<!-- Font6，自定义底部使用和看板娘使用的图标和字体文件-->
+<link type="text/css" rel="stylesheet" href="https://npm.elemecdn.com/font6pro@6.3.0/css/fontawesome.min.css" media="all" />
+<link href="https://npm.elemecdn.com/font6pro@6.3.0/css/all.min.css" rel="stylesheet" />
+
+<!--音乐播放器所用的文件-->
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.css" />
+<script src="https://npm.elemecdn.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://npm.elemecdn.com/meting2@0.0.1/js/Meting.min.js"></script>
+
 <style>
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f4f4f4;
+  /* 去除通知栏 右上角 X */
+  .notify-render .hope-close-button {
+    display: none;
+  }
+  /*去掉底部*/
+  .footer {
+    display: none !important;
+  }
+
+  /* 此选项两处CSS 在v3.31.0中已优化 滚动显示 和 右下角设置网格模式尺寸大小 */
+  /* 文字超长自动换行 */
+  /*.name-box .name {
+    white-space: unset !important;
+    overflow: unset !important;
+    }*/
+  /* 缩略图图片变大 代码中的160px 自己改 现在是注释状态若需要自行解除注释 */
+  /*.obj-box > div {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr))
+    }
+    .obj-box > div .item-thumbnail{
+    height: 100px;
+    }*/
+
+  /*
+    图片API用法点进去都会有食用说明的,API来自网络不保证实效性稳定性自己测试
+    樱花：https://www.dmoe.cc
+    夏沫：https://cdn.seovx.com
+    搏天：https://api.btstu.cn/doc/sjbz.php
+    姬长信：https://github.com/insoxin/API
+    小歪：https://api.ixiaowai.cn/
+    保罗：https://api.paugram.com
+    墨天逸：https://api.mtyqx.cn
+    岁月小筑：https://img.xjh.me
+    东方Project：https://img.paulzzh.com
+    */
+  /*白天背景图*/
+  .hope-ui-light {
+    background-image: url("https://pic.rmb.bdstatic.com/bjh/7569b014a1abafd5481298763300ae1d.png") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-x: center;
+  }
+  /*夜间背景图*/
+  .hope-ui-dark {
+    background-image: url("https://pic.rmb.bdstatic.com/bjh/ebe942a9de49856f389c65f25a338335.png") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position-x: center;
+  }
+
+  /*主列表白天模式透明*/
+  .obj-box.hope-stack.hope-c-dhzjXW.hope-c-PJLV.hope-c-PJLV-igScBhH-css {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+  }
+  /*主列表夜间模式透明*/
+  .obj-box.hope-stack.hope-c-dhzjXW.hope-c-PJLV.hope-c-PJLV-iigjoxS-css {
+    background-color: rgb(0 0 0 / 50%) !important;
+  }
+  /*readme白天模式透明*/
+  .hope-c-PJLV.hope-c-PJLV-ikSuVsl-css {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+  }
+  /*readme夜间模式透明*/
+  .hope-c-PJLV.hope-c-PJLV-iiuDLME-css {
+    background-color: rgb(0 0 0 / 50%) !important;
+  }
+
+
+  /*顶部右上角切换按钮透明*/
+  .hope-ui-light .hope-c-ivMHWx-hZistB-cv.hope-icon-button {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+  }
+  .hope-ui-dark .hope-c-ivMHWx-hZistB-cv.hope-icon-button {
+    background-color: rgb(0 0 0 / 50%) !important;
+  }
+
+
+  /*右下角侧边栏按钮透明 第一个是白天 第二个是夜间*/
+  .hope-ui-light .hope-c-PJLV-ijgzmFG-css {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+  }
+  .hope-ui-dark .hope-c-PJLV-ijgzmFG-css {
+    background-color: rgb(0 0 0 / 50%) !important;
+  }
+  /*白天模式代码块透明*/
+  .hope-ui-light pre {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  /*夜间模式代码块透明*/
+  .hope-ui-dark pre {
+    background-color: rgba(255, 255, 255, 0) !important;
+  }
+
+
+  /*左侧侧边栏目录*/
+  /*白天模式*/
+  .hope-ui-light .hope-c-PJLV-ieGWMbI-css {
+    background: rgba(255, 255, 255, 0.5) !important;
+  }
+  /*夜间模式*/
+  .hope-ui-dark .hope-c-PJLV-ieGWMbI-css {
+    background-color: rgb(0 0 0 / 50%) !important;
+  }
+  /* 返回顶部 */
+  .hope-c-PJLV-ihVEsOa-css {
+    background: rgba(255, 255, 255, 0.5) !important;
+  }
+  .hope-ui-dark .hope-c-PJLV-ihVEsOa-css {
+    background-color: rgb(0 0 0 / 50%) !important;
+  }
+
+
+  /*顶部*/
+  #root > .header {
+    background: rgba(255, 255, 255, 0);
+  }
+  /*导航条*/
+  /*白天模式*/
+  .hope-ui-light .body > .nav {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: var(--hope-radii-xl);
+  }
+  /*夜间模式*/
+  .hope-ui-dark .body > .nav {
+    background-color: rgb(0 0 0 / 50%);
+    border-radius: var(--hope-radii-xl);
+  }
+  /*隐藏导航条遮罩*/
+  .body > .nav::after {
+    display: none;
+  }
+
+
+  /*底部CSS，.App .table这三个一起的*/
+  dibu {
+    border-top: 0px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+  .App {
+    min-height: 85vh;
+  }
+  .table {
+    margin: auto;
+  }
+
+  
+  /*全局字体*/
+  * {
+    font-family: LXGW WenKai;
+  }
+  * {
+    font-weight: bold;
+  }
+  body {
+    font-family: LXGW WenKai;
+  }
+
+  /*以下为评论系统专用*/
+  /*适配大小契合度*/
+  .newValine {
+    width: min(96%, 940px);
+    flex-direction: column;
+    row-gap: var(--hope-space-2);
+    border-radius: var(--hope-radii-xl);
+    padding: var(--hope-space-2);
+    box-shadow: var(--hope-shadows-lg);
+  }
+  /*评论区 - 白天模式透明度*/
+  .hope-ui-light .newValine {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+  }
+  /*评论区 - 夜间模式透明度*/
+  .hope-ui-dark .newValine {
+    background-color: rgb(0 0 0 / 50%) !important;
+  }
+  /*输入栏里面跳舞的小人背景图,jsdelivr加载慢的可以自己替换或者删掉*/
+  .vedit {
+    background-image: url("https://cdn.jsdelivr.net/gh/anwen-anyi/imgAnwen/images/OuNiJiang.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    transition: all 0.25s ease-in-out 0s;
+  }
+  textarea#comment-textarea:focus {
+    background-position-y: 120px;
+    transition: all 0.25s ease-in-out 0s;
+  }
+
+
+  /*渐变背景CSS*/
+  #canvas-basic {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -999;
+  }
+
+
+  /* 以下为音乐播放器额外配置 */
+  /* 如果你想要音乐播放器不是很靠底部可以自己设置一下数值 0是靠最底部 */
+  .aplayer .aplayer-body,
+  .aplayer.aplayer-withlist {
+    bottom: 0rem !important;
+  }
+  /*音乐播放器进一步进行隐藏*/
+  /* 需要就加不需要就不用加 */
+  .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+    left: 0 !important;
+  }
+</style>
+<style>
+/*白天模式 搜索主体+毛玻璃*/
+.hope-ui-light .hope-c-PJLV-iiBaxsN-css{
+   background-color: rgba(255,255,255,0.2)!important;
+   backdrop-filter: blur(10px)!important;
 }
 
-.fullscreen-image {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  cursor: pointer;
+/*白天模式 搜索栏输入框+毛玻璃*/
+.hope-ui-light .hope-c-kvTTWD-hYRNAb-variant-filled{
+   background-color: rgba(255,255,255,0.2)!important;
+   backdrop-filter: blur(10px)!important;
+}
+
+/*白天模式 搜索按钮+毛玻璃*/
+.hope-ui-light .hope-c-PJLV-ikEIIxw-css{
+   background-color: rgba(255,255,255,0.2)!important;
+   backdrop-filter: blur(10px)!important;
+   padding: var(--hope-space-1)!important;
+}
+
+/*夜间模式搜索主体+毛玻璃*/
+.hope-ui-dark .hope-c-PJLV-iiBaxsN-css{
+    background-color: rgb(0 0 0 / 10%)!important;
+    backdrop-filter: blur(10px)!important;
+}
+
+/*夜间模式搜索栏+毛玻璃*/
+.hope-ui-dark .hope-c-kvTTWD-hYRNAb-variant-filled{
+    background-color: rgb(0 0 0 / 10%)!important;
+    backdrop-filter: blur(10px)!important;
+}
+
+/*夜间模式 搜索按钮+毛玻璃*/
+.hope-ui-dark .hope-c-PJLV-ikEIIxw-css{
+    background-color: rgb(0 0 0 / 10%)!important;
+    backdrop-filter: blur(10px)!important;
+    padding: var(--hope-space-1)!important;
 }
 </style>
+
+
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta name="referrer" content="same-origin" >
+    <meta name="generator" content="AList V3" >
+    <meta name="theme-color" content="#000000" >
+    <meta name="google" content="notranslate" >
+    
+    <meta name="apple-mobile-web-app-capable" content="yes" >
+    <meta name="apple-mobile-web-app-title" content="AList" >
+    <link       rel="apple-touch-icon"
+      href="https://jsd.nn.ci/gh/alist-org/logo@main/logo.png"
+    >
+    <script       src="https://g.alicdn.com/IMM/office-js/1.1.5/aliyun-web-office-sdk.min.js"
+      async
+    ></script>
+    <link       rel="shortcut icon"
+      type="image/ico"
+      href="https://img520.com/SvJkMG.png"
+    >
+    <title>YZFLIGHT远征飞行-高速下载站</title>
+    <script>
+      window.ALIST = {
+        cdn: '',
+        monaco_cdn: undefined,
+        base_path: '/',
+        api: undefined,
+        main_color: '#ee2746',
+      }
+      window.__dynamic_base__ = window.ALIST.cdn || ""
+    </script>
+    
+    
+    <script type="module">try{import.meta.url;import("_").catch(()=>1);}catch(e){}window.__vite_is_modern_browser=true;</script>
+    <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy build because dynamic import or import.meta.url is unsupported, syntax error above should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src= window.__dynamic_base__+e.getAttribute('data-src'),n.onload=function(){System.import( window.__dynamic_base__+document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
+    <script>
+(function(){
+var preloads = [{"parentTagName":"head","tagName":"link","attrs":{"href":"/static/manifest.json","rel":"manifest"}},{"parentTagName":"head","tagName":"script","attrs":{"type":"module","crossorigin":"","src":"/assets/index.cd8652af.js"}},{"parentTagName":"head","tagName":"link","attrs":{"rel":"stylesheet","href":"/assets/index.c4c82a28.css"}}];
+function setAttribute(target, attrs) {
+for (var key in attrs) {
+  target.setAttribute(key, attrs[key]);
+}
+return target;
+};
+for(var i = 0; i < preloads.length; i++){
+var item = preloads[i]
+var childNode = document.createElement(item.tagName);
+setAttribute(childNode, item.attrs)
+if( window.__dynamic_base__) {
+  if(item.tagName == 'link') {
+    setAttribute(childNode, { href:  window.__dynamic_base__ + item.attrs.href })
+  } else if (item.tagName == 'script') {
+    setAttribute(childNode, { src:  window.__dynamic_base__ + item.attrs.src })
+  }
+}
+document.getElementsByTagName(item.parentTagName)[0].appendChild(childNode);
+}
+})();
+</script>
 </head>
-<body>
-<div class="fullscreen-image" onclick="window.location.href='https://yzflight.github.io/download.html'">
-<img src="https://img520.com/CMh9t6.png" alt="YZFLIGHT远征飞行官网">
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+
+    
+    <!--延迟加载-->
+<!--如果要写自定义内容建议都加到这个延迟加载的范围内-->
+<div id="customize" style="display: none;">
+  <div>
+  <!--音乐播放器-->
+      <meting-js fixed="true" autoplay="false" theme="#409EFF" list-folded="true" auto="QQ音乐或者网易云的链接"></meting-js>
+  
+  <!--评论模块还有下面的script也是-->
+  <center>
+    <div class="newValine" id="vcomments"></div>
+  </center>
+  <script>
+    new Valine({
+      visitor: true,
+      el: '#vcomments',
+      avatar: 'wavatar',
+      appId: 'Figuebtf1tUMz4xsltkXNiCo-gzGzoHsz',
+      appKey: 'rjsoYihH5XvKWTuCWxnMUObO',
+      placeholder: "关于航模的各种问题欢迎在评论区讨论～"
+    }) 
+  </script>
+
+      <br />
+      <center class="dibu">
+          <div style=" line-height: 20px;font-size: 9pt;font-weight: bold;">
+              <span>
+                  "
+                  <span style="color: rgb(13, 109, 252); font-weight: bold;" id="hitokoto">
+                      <a href="#" id="hitokoto_text">
+                          "我们的口号：为方便模友而生"
+                      </a>
+                  </span> "
+              </span>
+              <p style="margin-left: 10rem;font-size: 8pt;">
+                  <small>
+                      —— YZ
+                  </small>
+              </p>
+          </div>
+
+          <div style="font-size: 13px; font-weight: bold;">
+             <span class="nav-item">
+                  <a class="nav-link" href="https://muselink.cc/fpv" target="_blank">
+                      <i class="fas fa-home" style="color:#ee2746" aria-hidden="true">
+                      </i>
+                      
+                  </a>
+              </span>
+              <span class="nav-item">
+                  <a class="nav-link" href="https://qm.qq.com/cgi-bin/qm/qr?k=jkvR02WuFbnhdf55ZCHl_qzK8Ux_sszy&noverify=0&personal_qrcode_source=4"
+                      target="_blank">
+                      <i class="fab fa-qq" style="color:#ee2746" aria-hidden="true">
+                      </i>
+                      
+                  </a>
+              </span>
+              <span class="nav-item">
+                  <a class="nav-link" href="/cdn-cgi/l/email-protection#e1d0d4d8d7d1d5d8d5d7d7a19090cf828e8c" target="_blank">
+                      <i class="fa-duotone fa-envelope-open" style="color:#ee2746" aria-hidden="true">
+                      </i>
+                      
+                  </a>
+              </span>
+              <!--后台入口-->
+              <span class="nav-item">
+                  <a class="nav-link" href="/@manage" target="_blank">
+                      <i class="fa-solid fa-folder-gear" style="color:#ee2746;" aria-hidden="true">
+                      </i>
+                      
+                  </a>
+              </span>
+              <!---->
+              <span class="nav-item">
+                  <a class="nav-link" href="" target="_blank">
+                      <i class="fa-solid fa-copyright" style="color:#ee2746;" aria-hidden="true">
+                      </i>
+                      Alist
+                  </a>
+              </span>
+              <br />
+              <span class="nav-item">
+                 <strong>旧网址</strong>
+              </span>
+              <span class="nav-item">
+                 <a class="nav-link" href="http://www.yzbjfpv.top/" target="_blank">
+                    <i class="fas fa-link" style="color:#ee2746" aria-hidden="true"></i>
+                    YZBJFPV 
+                 </a>
+              </span>              
+      <br />
+      <!--添加一个访问量-->
+      <span>
+                  本"<span style="color: rgb(13, 109, 252); font-weight: bold;"><a href="#">下载站</a></span>"访问量 <span id="busuanzi_value_page_pv" style="color: rgb(13, 109, 252); font-weight: bold;"></span> 次 本站总访问量 <span id="busuanzi_value_site_pv" style="color: rgb(13, 109, 252); font-weight: bold;"></span>                次 本站总访客数 <span id="busuanzi_value_site_uv" style="color: rgb(13, 109, 252); font-weight: bold;"></span> 人
+              </span>
+              <br />
+              <!--添加一个运行时间量-->    
+              <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+                  function show_runtime() {
+                      window.setTimeout("show_runtime()", 1000);
+                      X = new Date("8/17/2024 15:00:00");
+                      Y = new Date();
+                      T = (Y.getTime() - X.getTime());
+                      M = 24 * 60 * 60 * 1000;
+                      a = T / M;
+                      A = Math.floor(a);
+                      b = (a - A) * 24;
+                      B = Math.floor(b);
+                      c = (b - B) * 60;
+                      C = Math.floor((b - B) * 60);
+                      D = Math.floor((c - C) * 60);
+                      runtime_span.innerHTML = "本站已运行 " + A + "天" + B + "小时" + C + "分" + D + "秒"
+                  }
+                  show_runtime();
+              </script>
+              
+              <span id="runtime_span"></span>
+
+      <!--添加备案信息-->
+              <span class="nav-item">
+                  <a class="nav-link" href="https://beian.miit.gov.cn" target="_blank">
+                      <i class="fa-solid fa-shield-check" style="color:#409EFF;" aria-hidden="true">
+                      </i>
+                      
+                  </a>
+              </span>
+          </div>
+      </center>
+      <br />
+      <br />
+  </div>
+
+
+
+  <!--一言API-->
+  <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  <body>
+      <script>
+      function clickEffect() {
+        let balls = [];
+        let longPressed = false;
+        let longPress;
+        let multiplier = 0;
+        let width, height;
+        let origin;
+        let normal;
+        let ctx;
+        const colours = ["#F73859", "#14FFEC", "#00E0FF", "#FF99FE", "#FAF15D"];
+        const canvas = document.createElement("canvas");
+        document.body.appendChild(canvas);
+        canvas.setAttribute("style", "width: 100%; height: 100%; top: 0; left: 0; z-index: 99999; position: fixed; pointer-events: none;");
+        const pointer = document.createElement("span");
+        pointer.classList.add("pointer");
+        document.body.appendChild(pointer);
+       
+        if (canvas.getContext && window.addEventListener) {
+          ctx = canvas.getContext("2d");
+          updateSize();
+          window.addEventListener('resize', updateSize, false);
+          loop();
+          window.addEventListener("mousedown", function(e) {
+            pushBalls(randBetween(10, 20), e.clientX, e.clientY);
+            document.body.classList.add("is-pressed");
+            longPress = setTimeout(function(){
+              document.body.classList.add("is-longpress");
+              longPressed = true;
+            }, 500);
+          }, false);
+          window.addEventListener("mouseup", function(e) {
+            clearInterval(longPress);
+            if (longPressed == true) {
+              document.body.classList.remove("is-longpress");
+              pushBalls(randBetween(50 + Math.ceil(multiplier), 100 + Math.ceil(multiplier)), e.clientX, e.clientY);
+              longPressed = false;
+            }
+            document.body.classList.remove("is-pressed");
+          }, false);
+          window.addEventListener("mousemove", function(e) {
+            let x = e.clientX;
+            let y = e.clientY;
+            pointer.style.top = y + "px";
+            pointer.style.left = x + "px";
+          }, false);
+        } else {
+          console.log("canvas or addEventListener is unsupported!");
+        }
+       
+       
+        function updateSize() {
+          canvas.width = window.innerWidth * 2;
+          canvas.height = window.innerHeight * 2;
+          canvas.style.width = window.innerWidth + 'px';
+          canvas.style.height = window.innerHeight + 'px';
+          ctx.scale(2, 2);
+          width = (canvas.width = window.innerWidth);
+          height = (canvas.height = window.innerHeight);
+          origin = {
+            x: width / 2,
+            y: height / 2
+          };
+          normal = {
+            x: width / 2,
+            y: height / 2
+          };
+        }
+        class Ball {
+          constructor(x = origin.x, y = origin.y) {
+            this.x = x;
+            this.y = y;
+            this.angle = Math.PI * 2 * Math.random();
+            if (longPressed == true) {
+              this.multiplier = randBetween(14 + multiplier, 15 + multiplier);
+            } else {
+              this.multiplier = randBetween(6, 12);
+            }
+            this.vx = (this.multiplier + Math.random() * 0.5) * Math.cos(this.angle);
+            this.vy = (this.multiplier + Math.random() * 0.5) * Math.sin(this.angle);
+            this.r = randBetween(8, 12) + 3 * Math.random();
+            this.color = colours[Math.floor(Math.random() * colours.length)];
+          }
+          update() {
+            this.x += this.vx - normal.x;
+            this.y += this.vy - normal.y;
+            normal.x = -2 / window.innerWidth * Math.sin(this.angle);
+            normal.y = -2 / window.innerHeight * Math.cos(this.angle);
+            this.r -= 0.3;
+            this.vx *= 0.9;
+            this.vy *= 0.9;
+          }
+        }
+       
+        function pushBalls(count = 1, x = origin.x, y = origin.y) {
+          for (let i = 0; i < count; i++) {
+            balls.push(new Ball(x, y));
+          }
+        }
+       
+        function randBetween(min, max) {
+          return Math.floor(Math.random() * max) + min;
+        }
+       
+        function loop() {
+          ctx.fillStyle = "rgba(255, 255, 255, 0)";
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let i = 0; i < balls.length; i++) {
+            let b = balls[i];
+            if (b.r < 0) continue;
+            ctx.fillStyle = b.color;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2, false);
+            ctx.fill();
+            b.update();
+          }
+          if (longPressed == true) {
+            multiplier += 0.2;
+          } else if (!longPressed && multiplier >= 0) {
+            multiplier -= 0.4;
+          }
+          removeBall();
+          requestAnimationFrame(loop);
+        }
+       
+        function removeBall() {
+          for (let i = 0; i < balls.length; i++) {
+            let b = balls[i];
+            if (b.x + b.r < 0 || b.x - b.r > width || b.y + b.r < 0 || b.y - b.r > height || b.r < 0) {
+              balls.splice(i, 1);
+            }
+          }
+        }
+      }
+      clickEffect();//调用特效函数
+      </script>
+      </body>
+<!--延迟加载范围到这里结束-->
 </div>
-</body>
+<!--延迟加载配套使用JS-->
+<script>
+  let interval = setInterval(() => {
+      if (document.querySelector(".footer")) {
+          document.querySelector("#customize").style.display = "";
+          clearInterval(interval);
+      }
+  }, 200);
+</script>
+
+<!-- 渐变背景初始化,如果要使用渐变背景把下面的那一行注释去掉即可-->
+<!-- 下面的几行都是渐变的一套,自定义头部内还有一个关联的自定义CSS -->
+<canvas id="canvas-basic"></canvas> 
+<script src="https://npm.elemecdn.com/granim@2.0.0/dist/granim.min.js"></script>
+<script>
+var granimInstance = new Granim({
+  element: '#canvas-basic',
+  direction: 'left-right',
+  isPausedWhenNotInView: true,
+  states : {
+      "default-state": {
+          gradients: [
+              ['#a18cd1', '#fbc2eb'],
+               ['#fff1eb', '#ace0f9'],
+               ['#d4fc79', '#96e6a1'],
+               ['#a1c4fd', '#c2e9fb'],
+               ['#a8edea', '#fed6e3'],
+               ['#9890e3', '#b1f4cf'],
+               ['#a1c4fd', '#c2e9fb'],
+               ['#fff1eb', '#ace0f9']
+         
+          ]
+      }
+  }
+});
+</script>
+
+    <script nomodule>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
+    <script nomodule crossorigin id="vite-legacy-polyfill" data-src="/assets/polyfills-legacy.01756638.js">!(function() {
+      var e = document.createElement('script')
+      e.src =  window.__dynamic_base__ + document.getElementById('vite-legacy-polyfill').getAttribute('data-src');
+      e.onload = function() {
+        System.import( window.__dynamic_base__+document.getElementById('vite-legacy-entry').getAttribute('data-src'))
+      };
+      document.body.appendChild(e)
+    })();</script>
+    <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/index-legacy.58759cd8.js"></script>
+  </body>
 </html>
