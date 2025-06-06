@@ -1,57 +1,170 @@
-<!DOCTYPE html>
-<html lang=“zh”>
+<html lang="zh">
 <head>
-<meta charset=“UTF-8”>
-<meta name=“viewport” content=“width=device-width, initial-scale=1.0”>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YZ极域杀手官方网站</title>
+<!-- 第三方动画库 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <style>
+/* 动态背景动画 */
+@keyframes gradientAnimation {
+  0% {background-position: 0% 50%}
+  50% {background-position: 100% 50%}
+  100% {background-position: 0% 50%}
+}
+
 body {
-background: linear-gradient(to right, #FF00FF, #00FFFF);
-margin: 0;
-padding: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #00ff00);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
-.container {
-text-align: center;
-color: white;
+
+/* 标题动画 */
+.animated-text {
+  animation: bounce 1.5s infinite;
+  font-size: 4rem;
+  margin: 30px 0;
 }
-.large-text {
-font-size: 3rem;
-margin-bottom: 2rem;
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
-.button {
-background-color: dodgerblue;
-color: white;
-border: none;
-cursor: pointer;
-padding: 1rem 2rem;
-font-size: 1.2rem;
-transition: background-color 0.3s ease;
+
+/* 大文字脉冲效果 */
+.big-text {
+  font-size: 8vw;
+  color: #ffd700;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  animation: animate__pulse 2s infinite;
+  margin: 20px 0;
 }
-.button:hover {
-background-color: cornflowerblue;
+
+/* 优点方框 */
+.feature-box {
+  border: 2px solid #00FFFF;
+  border-radius: 15px;
+  padding: 20px 30px;
+  margin: 10px 15px;
+  box-shadow: 0 0 15px rgba(255,0,255,0.2);
+  max-width: 300px;
+  text-align: left;
 }
-.small-text {
-color: grey;
-font-size: 0.8rem;
-margin-top: 2rem;
-}
+
 @media (max-width: 600px) {
-.container {
-flex-direction: column;
+  .feature-box {
+    max-width: 100%;
+    margin: 15px 0;
+  }
 }
+
+/* 下载按钮 */
+.button {
+  background-color: #00aced;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 1.5rem 4rem;
+  font-size: 1.8rem;
+  border-radius: 30px;
+  margin: 25px 0;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  background-color: #0084b4;
+}
+
+.button small {
+  display: block;
+  font-size: 0.8rem;
+  color: #e0ffff;
+}
+
+/* 鸣谢排版 */
+.support {
+  font-size: 0.9rem;
+  margin: 20px 0;
+  color: #ddd;
+}
+
+.support span {
+  margin: 0 8px;
+}
+
+.footer {
+  font-size: 0.8rem;
+  color: #ddd;
+  margin-top: 50px;
+  padding: 10px;
 }
 </style>
 </head>
 <body>
-<div class=“container”>
-<h1>YZ极域杀手—强力破解极域控屏</h1>
-<a href="https://yzbjfpv.lanzn.com/iMhbz2g4dbda"><input type="button" value='点我下载'></a>
-<p class=“small-text”>下载提取码：sbjiyu</p>
+<div class="container">
+  <!-- 动态标题 -->
+  <div class="animated-text">YZ极域杀手</div>
+  <h2 class="large-text">V1.0.2 2025年6月最新版本</h2>
+  
+  <!-- 大动画文字 -->
+  <div class="big-text animate__animated">
+    八(6) 65%的同学都在用*
+  </div>
+  
+  <!-- 核心优点 -->
+  <div style="margin: 30px 0;">
+    <h3 style="color: #FFD700; margin-bottom: 20px;">核心优点</h3>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+      <div class="feature-box">
+        <h4>快速启动</h4>
+        <p>自动抓包技术，秒级响应</p>
+      </div>
+      <div class="feature-box">
+        <h4>简单三步</h4>
+        <p>一键安装→快速配置→立即使用</p>
+      </div>
+      <div class="feature-box">
+        <h4>安全可靠</h4>
+        <p>自研自毁系统，数据零残留</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 下载区域 -->
+  <div style="text-align: center;">
+    <a href="https://yzbjfpv.lanzn.com/iMhbz2g4dbda" target="_blank">
+      <button class="button">
+        点我下载 <br>
+        <small>(极速破解版 - V1.0.2)</small>
+      </button>
+    </a>
+    <p style="color: #00FFFF; font-size: 1.2rem; margin: 10px 0;">
+      提取码: <span style="color: #FFD700; font-weight: bold;">sbjiyu</span>
+    </p>
+  </div>
+
+  <!-- 特别鸣谢 -->
+  <div class="support">
+    <p>特别鸣谢：</p>
+    <span>翼效架构</span> • <span>飞阅传媒</span> • 
+    <span>通辽二手</span> • <span>LN-Motor</span> • 
+    <span>PokRC魄客模型</span>
+  </div>
+
+  <!-- 底部信息 -->
+  <div class="footer">
+    *数据截至2025年3月
+  </div>
 </div>
 </body>
 </html>
