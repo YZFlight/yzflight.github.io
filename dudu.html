@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>嘟嘟电池 - 专业航模锂聚合物电池</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563EB',
+            secondary: '#10B981',
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .gradient-nav {
+        background: linear-gradient(90deg, #2563EB 0%, #10B981 100%);
+        background-size: 200% 100%;
+        animation: gradientShift 10s ease infinite;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .card-glow {
+        box-shadow: 0 0 20px rgba(37, 99, 235, 0.08);
+      }
+      .particle-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+      .content-relative {
+        position: relative;
+        z-index: 1;
+      }
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-inter bg-gray-50 text-gray-800 overflow-x-hidden">
+  <!-- 粒子背景容器 -->
+  <div id="particles-js" class="particle-bg"></div>
+  
+  <!-- 导航栏 -->
+  <header class="fixed top-0 left-0 right-0 z-50 gradient-nav shadow-md transition-all duration-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <!-- Logo (2:1比例) -->
+      <div class="w-32 h-16 bg-white rounded-md flex items-center justify-center overflow-hidden shadow-md">
+        <img src="https://www.img520.com/c890Go.jpeg" alt="嘟嘟电池" class="w-full h-full object-contain">
+      </div>
+      
+      <!-- 导航链接 -->
+      <nav class="hidden md:flex space-x-8">
+        <a href="#home" class="text-white hover:text-gray-100 transition-colors duration-300 font-medium">首页</a>
+        <a href="#products" class="text-white hover:text-gray-100 transition-colors duration-300 font-medium">产品系列</a>
+        <a href="#contact" class="text-white hover:text-gray-100 transition-colors duration-300 font-medium">联系我们</a>
+      </nav>
+      
+      <!-- 移动端菜单按钮 -->
+      <button class="md:hidden text-white text-2xl focus:outline-none" id="menuBtn">
+        ☰
+      </button>
+    </div>
+    
+    <!-- 移动端菜单 -->
+    <div class="md:hidden hidden bg-white shadow-lg absolute w-full" id="mobileMenu">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+        <a href="#home" class="text-gray-800 hover:text-primary transition-colors py-2">首页</a>
+        <a href="#products" class="text-gray-800 hover:text-primary transition-colors py-2">产品系列</a>
+        <a href="#contact" class="text-gray-800 hover:text-primary transition-colors py-2">联系我们</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主内容 -->
+  <main class="pt-24 pb-16">
+    <!-- 首页区域 -->
+    <section id="home" class="min-h-[70vh] flex items-center relative">
+      <div class="particle-bg" id="particles-home"></div>
+      <div class="container mx-auto px-4 py-12 content-relative">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6 text-shadow opacity-0 transform translate-y-8 transition-all duration-1000" id="heroTitle">
+            专业航模锂聚合物电池
+          </h1>
+          <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 mb-10 max-w-2xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 delay-300" id="heroDesc">
+            为航模爱好者提供高性能动力解决方案，稳定可靠，续航持久
+          </p>
+          <a href="#products" class="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full transition-all duration-300 transform hover:scale-105 opacity-0 translate-y-8 transition-all duration-1000 delay-500" id="heroBtn">
+            探索产品系列
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 产品展示 -->
+    <section id="products" class="py-20 bg-white relative">
+      <div class="particle-bg" id="particles-products"></div>
+      <div class="container mx-auto px-4 content-relative">
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-center mb-16 opacity-0 transform translate-y-8 transition-all duration-1000" id="productsTitle">
+          高性能电池系列
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <!-- 产品1 -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden card-glow transform translate-y-20 opacity-0 transition-all duration-700" style="transition-delay: 100ms;" id="product1">
+            <div class="relative w-full" style="padding-top: 32.26%;">
+              <img src="https://www.img520.com/0E5XIH.jpeg" alt="12000mAh电池" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+              <div class="absolute top-4 right-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-full shadow-md">
+                12000mAh
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-3">高能效电池</h3>
+              <div class="text-gray-600 space-y-2 mb-4">
+                <p>专为中大型航模设计，提供稳定持久的电力输出</p>
+              </div>
+              <div class="bg-white p-3 rounded-lg">
+                <div class="text-sm text-gray-700 space-y-1">
+                  <p>• 放电倍率: 20/25/30/35/40/60C</p>
+                  <p>• 电压: 14.8/22.2/28.6/44.4/48.1/66.6V</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 产品2 -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden card-glow transform translate-y-20 opacity-0 transition-all duration-700" style="transition-delay: 300ms;" id="product2">
+            <div class="relative w-full" style="padding-top: 32.26%;">
+              <img src="https://www.img520.com/RnWS1l.jpeg" alt="16000mAh电池" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+              <div class="absolute top-4 right-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-full shadow-md">
+                16000mAh
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-3">专业级电池</h3>
+              <div class="text-gray-600 space-y-2 mb-4">
+                <p>平衡容量与重量，适合专业竞赛和表演飞行</p>
+              </div>
+              <div class="bg-white p-3 rounded-lg">
+                <div class="text-sm text-gray-700 space-y-1">
+                  <p>• 放电倍率: 20/25/30/35/40/60C</p>
+                  <p>• 电压: 14.8/22.2/28.6/44.4/48.1/66.6V</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 产品3 -->
+          <div class="bg-gray-50 rounded-xl overflow-hidden card-glow transform translate-y-20 opacity-0 transition-all duration-700" style="transition-delay: 500ms;" id="product3">
+            <div class="relative w-full" style="padding-top: 32.26%;">
+              <img src="https://www.img520.com/6jw5Cy.jpeg" alt="22000mAh电池" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+              <div class="absolute top-4 right-4 bg-primary text-white text-sm font-medium px-3 py-1 rounded-full shadow-md">
+                22000mAh
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-xl mb-3">大容量电池</h3>
+              <div class="text-gray-600 space-y-2 mb-4">
+                <p>为大型航模和长时间任务设计，超长续航能力</p>
+              </div>
+              <div class="bg-white p-3 rounded-lg">
+                <div class="text-sm text-gray-700 space-y-1">
+                  <p>• 放电倍率: 20/25/30/35/40/60C</p>
+                  <p>• 电压: 14.8/22.2/28.6/44.4/48.1/66.6V</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 产品特点 -->
+    <section class="py-20 bg-gray-50 relative">
+      <div class="container mx-auto px-4">
+        <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-center mb-16 opacity-0 transform translate-y-8 transition-all duration-1000" id="featuresTitle">
+          产品优势
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div class="bg-white p-8 rounded-xl shadow-sm transform translate-y-20 opacity-0 transition-all duration-700" style="transition-delay: 100ms;" id="feature1">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 float-animation">
+              <span class="text-primary text-2xl">⚡</span>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-3">强劲输出</h3>
+            <p class="text-gray-600 text-center">
+              高放电倍率设计，瞬间爆发强劲动力，满足各种复杂飞行动作需求
+            </p>
+          </div>
+          
+          <div class="bg-white p-8 rounded-xl shadow-sm transform translate-y-20 opacity-0 transition-all duration-700" style="transition-delay: 300ms;" id="feature2">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 float-animation" style="animation-delay: 0.5s;">
+              <span class="text-primary text-2xl">⏱️</span>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-3">持久续航</h3>
+            <p class="text-gray-600 text-center">
+              高密度电芯技术，能量密度高，续航时间更长，延长飞行乐趣
+            </p>
+          </div>
+          
+          <div class="bg-white p-8 rounded-xl shadow-sm transform translate-y-20 opacity-0 transition-all duration-700" style="transition-delay: 500ms;" id="feature3">
+            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 float-animation" style="animation-delay: 1s;">
+              <span class="text-primary text-2xl">🛡️</span>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-3">安全可靠</h3>
+            <p class="text-gray-600 text-center">
+              多重保护设计，过充、过放、过流保护，使用更安心
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 联系区域 -->
+    <section id="contact" class="py-20 bg-white relative">
+      <div class="particle-bg" id="particles-contact"></div>
+      <div class="container mx-auto px-4 content-relative">
+        <div class="max-w-3xl mx-auto bg-gray-50 rounded-xl shadow-md p-8 md:p-10 transform translate-y-20 opacity-0 transition-all duration-1000" id="contactCard">
+          <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold mb-8 text-center">
+            联系我们
+          </h2>
+          <div class="flex flex-col items-center">
+            <div class="text-2xl md:text-3xl font-medium text-gray-800 mb-6 text-center px-4 py-3 bg-white rounded-lg shadow-sm w-full max-w-xs text-center">
+              tingbi3344
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-gray-400">© 2025 嘟嘟电池 版权所有</p>
+    </div>
+  </footer>
+
+  <script>
+   // 页面加载完成后执行
+document.addEventListener('DOMContentLoaded', function() {
+  // 粒子背景初始化
+  function initParticles(id, color) {
+    const elem = document.getElementById(id);
+    if (elem) {
+      particlesJS(id, {
+        "particles": {
+          "number": {
+            "value": 40,
+            "density": {
+              "enable": true,
+              "value_area": 800
+            }
+          },
+          "color": {
+            "value": color || "#2563EB"
+          },
+          "opacity": {
+            "value": 0.2,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 3,
+            "random": true,
+            "anim": {
+              "enable": true,
+              "speed": 2,
+              "size_min": 0.5,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": color || "#2563EB",
+            "opacity": 0.1,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 1,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "grab"
+            },
+            "onclick": {
+              "enable": true,
+              "mode": "push"
+            },
+            "resize": true
+          },
+          "modes": {
+            "grab": {
+              "distance": 140,
+              "line_linked": {
+                "opacity": 0.3
+              }
+            },
+            "push": {
+              "particles_nb": 3
+            }
+          }
+        },
+        "retina_detect": true
+      });
+    }
+  }
+
+  // 初始化各区域粒子背景
+  initParticles('particles-home', '#2563EB');
+  initParticles('particles-products', '#10B981');
+  initParticles('particles-contact', '#2563EB');
+
+  // 首页动画触发
+  setTimeout(() => {
+    document.getElementById('heroTitle').classList.remove('opacity-0', 'translate-y-8');
+  }, 300);
+  
+  setTimeout(() => {
+    document.getElementById('heroDesc').classList.remove('opacity-0', 'translate-y-8');
+  }, 600);
+  
+  setTimeout(() => {
+    document.getElementById('heroBtn').classList.remove('opacity-0', 'translate-y-8');
+  }, 900);
+
+  // 滚动动画监听
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-8', 'translate-y-20');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  // 监听产品区域动画元素
+  observer.observe(document.getElementById('productsTitle'));
+  observer.observe(document.getElementById('product1'));
+  observer.observe(document.getElementById('product2'));
+  observer.observe(document.getElementById('product3'));
+  
+  // 监听特点区域动画元素
+  observer.observe(document.getElementById('featuresTitle'));
+  observer.observe(document.getElementById('feature1'));
+  observer.observe(document.getElementById('feature2'));
+  observer.observe(document.getElementById('feature3'));
+  
+  // 监听联系区域动画元素
+  observer.observe(document.getElementById('contactCard'));
+
+  // 移动端菜单交互
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  // 平滑滚动
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: 'smooth'
+        });
+        
+        // 关闭移动端菜单
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+        }
+      }
+    });
+  });
+
+  // 导航栏滚动效果
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 50) {
+      header.classList.add('py-2', 'shadow-lg');
+      header.classList.remove('py-3', 'shadow-md');
+    } else {
+      header.classList.add('py-3', 'shadow-md');
+      header.classList.remove('py-2', 'shadow-lg');
+    }
+  });
+});
+  </script>
+</body>
+</html>
+           
